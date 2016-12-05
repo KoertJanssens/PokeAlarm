@@ -121,7 +121,7 @@ class Telegram_Alarm(Alarm):
 		text = 'Something with Captchas'
 		account = captcha_info['account']
 
-		body = ' \n{} more token needed. Solve via bookmarklet at https://pgorelease.nianticlabs.com/'.format(
+		body = ' \n{} more token needed. Solve via bookmarklet at http://www.pokehunt.me/status.php'.format(
 			captcha_info['token_needed']) if captcha_info['token_needed'] > 0 else ' \nNo more token needed.'
 
 		if captcha_info['status'] == 'encounter':
@@ -132,6 +132,8 @@ class Telegram_Alarm(Alarm):
 			text = '<b>Solved captcha for account {}</b>{}'.format(account, body)
 		elif captcha_info['status'] == 'failed':
 			text = '<b>Failed solving captcha for account {}</b>{}'.format(account, body)
+		elif captcha_info['status'] == 'kurt':
+			text = '<b>{} captchas needed!</b>{}'.format(captcha_info['token_needed'], body)
 
 		args = {
 			'chat_id': self.captcha['chat_id'],
